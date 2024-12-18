@@ -23,3 +23,15 @@ CREATE TABLE $tableName (
 );
 "@
 Invoke-Sqlcmd -ConnectionString $connectionString -Query $queryCreateTable
+
+
+# Insérer les data
+$services = Get-Service
+
+foreach ($service in $services) {
+    $nom = $service.Name
+    $etat = $service.Status
+
+    $query = "INSERT INTO $tableName (nom, etat) VALUES ('$nom', '$etat');"
+    Invoke-Sqlcmd -ConnectionString $connectionString -Query $query
+}
