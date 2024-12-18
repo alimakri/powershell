@@ -3,12 +3,25 @@
 # Afficher les choix et le score à chaque proposition
 # 1 : pierre -  2 : Feuille - 3 : Ciseau
 
+function Transforme
+{
+    param ([int]$code)
+    switch($code)
+    {
+        1 {return "Pierre"}
+        2 {return "Feuille"}
+        3 {return "Ciseaux"}
+    }
+}
+
+cls
 $pointsUser = 0
 $pointsMachine = 0
 
 while($pointsMachine -ne 3 -and $pointsUser -ne 3)
 {
     $propMachine = Get-Random -Minimum 1 -Maximum 3 # Choix machine
+    Write-Host "Faîtes un choix (1:Pierre, 2:Feuille ou 3:Ciseaux)"
     $propUser = Read-Host                          # Choix User
 
     $reponse = 0
@@ -31,7 +44,10 @@ while($pointsMachine -ne 3 -and $pointsUser -ne 3)
     {
         $reponse = 1
     }
-    Write-Host "$propUser - $propMachine -> $reponse" -ForegroundColor Yellow
+    $a = Transforme($propUser)
+    $b = Transforme($propMachine)
+    Write-Host "$a - $b" -ForegroundColor Yellow
+
     if ($reponse -eq 1)
     {
         $pointsUser ++
