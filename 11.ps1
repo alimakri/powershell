@@ -14,26 +14,33 @@ $continuer = $true
 While($Continuer)
 {
     Write-Host "Donnez un nombre: ($nCoup)"
-    $proposition = Read-Host 
-    $nCoup ++
-
-    if ($nCoup -ge 8) 
+    $propStr = Read-Host 
+    if (-not [int]::TryParse($propStr, [ref]$proposition) -or $proposition -lt 1 -or $proposition -gt 100 )
     {
-        Write-Host "Perdu"
-        $continuer = $false
-    }
-    elseif ($proposition -lt $nombreADeviner)
-    {
-        Write-Host "Trop petit"
-    }
-    elseif ($proposition -gt $nombreADeviner)
-    {
-        Write-Host "Trop grand"
+        Write-Host "Proposition non valide"
     }
     else
     {
-        Write-Host "Gagné"
-        $continuer = $false
+        $nCoup ++
+
+        if ($nCoup -ge 8) 
+        {
+            Write-Host "Perdu"
+            $continuer = $false
+        }
+        elseif ($proposition -lt $nombreADeviner)
+        {
+            Write-Host "Trop petit"
+        }
+        elseif ($proposition -gt $nombreADeviner)
+        {
+            Write-Host "Trop grand"
+        }
+        else
+        {
+            Write-Host "Gagné"
+            $continuer = $false
+        }
     }
 }
 
