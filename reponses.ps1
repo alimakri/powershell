@@ -53,10 +53,10 @@ function Exo4_Services
     $servicesStopped = $services | where {$_.Status -eq "Stopped"}
     $servicesRunning = $services | where {$_.Status -eq "Running"}
     Write-Host $servicesStopped.Count "services arrêtés" -ForegroundColor Yellow
-    write-host $servicesStopped -ForegroundColor Yellow
+    $servicesStopped | foreach{write-host $_.DisplayName  -ForegroundColor Yellow}
     write-host 
     Write-Host $servicesRunning.Count "services démarrés" -ForegroundColor Green
-    write-host $servicesRunning -ForegroundColor Green
+    $servicesRunning | foreach{write-host $_.DisplayName  -ForegroundColor Green}
 }
 
 cls
